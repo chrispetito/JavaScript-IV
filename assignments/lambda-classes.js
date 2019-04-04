@@ -22,6 +22,12 @@ class Instructor extends Person {
     grade(student, subject) {
         return `${student} receives a perfect score on ${subject}.`
     }
+    randomAdd(student) {
+        return student.grade += (10 * Math.random());
+    }
+    randomSubtract(student) {
+        return student.grade -= (10 * Math.random());
+    }
 }
 class Student extends Person {
     constructor (studentAttributes) {
@@ -29,6 +35,7 @@ class Student extends Person {
         this.previousBackground = studentAttributes.previousBackground;
         this.className = studentAttributes.className;
         this.favSubjects = studentAttributes.favSubjects;
+        this.grade = studentAttributes.grade;
     }
     listsSubjects() {
         return `${this.name} loves the subject(s) ${this.favSubjects}.`
@@ -38,6 +45,13 @@ class Student extends Person {
     }
     sprintChallenge(subject) {
         return `${this.name} has submitted a sprint challenge on ${subject}.`
+    }
+    graduate() {
+        if (this.grade >= 70) {
+            return `${this.name} is eligible for graduation!`;
+        } else {
+            return `${this.name} needs more practice. They will graduate soon!`;
+        };
     }
 }
 class ProjectManagers extends Instructor {
@@ -86,7 +100,8 @@ const fred = new Instructor({
     catchPhrase: `Practice makes perfect`,
     previousBackground: 'No coding experience',
     className: 'WEB19',
-    favSubjects: 'HTML and CSS'
+    favSubjects: 'HTML and CSS',
+    grade: 75
   });
 
   const mike = new Student({
@@ -99,7 +114,8 @@ const fred = new Instructor({
     catchPhrase: `Never give up`,
     previousBackground: 'Recreational coding',
     className: 'WEB18',
-    favSubjects: 'Classes and prototypes'
+    favSubjects: 'Classes and prototypes',
+    grade: 75
   });
   const julie = new Student({
     name: 'Julie',
@@ -111,7 +127,8 @@ const fred = new Instructor({
     catchPhrase: `Here we go again`,
     previousBackground: 'No coding experience',
     className: 'WEB19',
-    favSubjects: 'Responsive design'
+    favSubjects: 'Responsive design',
+    grade: 75
   });
 
   //ProjectManagers objects
@@ -148,3 +165,10 @@ console.log(mike.PRAssignment('Introduction to Git'));
 console.log(julie.listsSubjects());
 console.log(molly.debugsCode('Chris', 'JavaScript-IV'));
 console.log(benny.standUp('#web19'));
+console.log(julie.grade);
+console.log(fred.randomSubtract(mike));
+console.log(fred.randomSubtract(julie));
+console.log(bob.randomSubtract(jane));
+console.log(mike.graduate());
+console.log(julie.graduate());
+console.log(jane.graduate());
